@@ -1,4 +1,4 @@
-// import escapeHtml from '../utils/escape-html.js';
+// import escapeHtml from './src/utils/escape-html.js';
 
 export default class Comments {
   element;
@@ -35,6 +35,7 @@ export default class Comments {
     this.formElements = this.getSubElements(this.element, 'formelement');
     this.commentsElement = this.getSubElements(this.element, 'commentelement');
 
+    this.loadComments()
     this.initListeners()
 
     // console.log(this.element)
@@ -62,23 +63,37 @@ export default class Comments {
         default:
           this.formData[key] = elem.value
       }
+
+      this.formData['likeCount'] = 0;
     }
     console.log(this.formData)
   }
 
-  addNewComment(comment) {
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = this.getCommentTemplate(comment)
+  addNewComment(commentData) {
+    const comment = new Comment(commentData);
 
-    this.commentsElement.comments.prepend(wrapper.firstElementChild)
-    this.commentsData.push(comment)
+    this.commentsElement.comments.prepend(comment.element)
+    this.commentsData.push(commentData)
 
     this.formElements.commentForm.reset()
+  }
+
+  loadComments() {
+    this.commentsData.map((commentData) => {
+      const comment = new Comment(commentData);
+
+      this.commentsElement.comments.append(comment.element)
+    })
   }
 
   initListeners() {
     this.formElements.text.addEventListener('keypress', this.textareaOnKeypress)
     this.formElements.commentForm.addEventListener('submit', this.onSubmit);
+
+    this.formElements.button.addEventListener("click", () => console.log('fjfjffj'));
+
+    this.formElements.commentForm.addEventListener("focus", () => this.formElements.commentForm.classList.add('form_focused'), true);
+    this.formElements.commentForm.addEventListener("blur", () => this.formElements.commentForm.classList.remove('form_focused'), true)
 
     // this.formElements.date.addEventListener('focusin',function(e){
     //   e.target.type = 'date';
@@ -111,45 +126,94 @@ export default class Comments {
   getTemplate() {
     return `
     <div class="comments">
+      <h1 class="comments__header">${this.commentsData.length} Comments</h1>
       <form class="comments__form form" action="" data-formelement="commentForm">
         <div>
           <input class="form__username" id="username"  placeholder="Введите имя" type="text" data-formelement="username">
           <input class="form__date" id="date" type="date" placeholder="Укажите дату" data-formelement="date">
         </div>
-
-        <textarea class="form__textarea" placeholder="Введите текст комментария" name="" id="text" cols="30" rows="10"data-formelement="text"></textarea>
-        <button class="form__buttonSubmit" aria-pressed="false" data-formelement="button">Comment</button>
+        <textarea class="form__textarea" placeholder="Введите текст комментария" name="" id="text" cols="30" rows="4"data-formelement="text"></textarea>
+        <div class="form__borderline"></div>
+        <button class="form__button-submit" disabled aria-pressed="false" data-formelement="button">Comment</button>
       </form>
-      <h1>Comments</h1>
-
-      <div class="comments__comments-wrapper comments-wrapper" data-commentelement="comments">
-        ${this.commentsData.map((comment) => {
-          return this.getCommentTemplate(comment)
-        }).join('')}
-      </div>
-      
+      <div class="comments__comments-wrapper comments-wrapper" data-commentelement="comments"></div>
     </div>
     `
   }
 
-  getCommentTemplate(commentData) {
+  remove() {
+    if (this.element) {
+      this.element.remove();
+    }
+  }
+
+  destroy() {
+    this.remove()
+    this.element = null;
+  }
+}
+
+// COMMENT CLASS //
+
+class Comment {
+
+  likeOnClick = (event) => {
+    event.preventDefault();
+    alert('like')
+  }
+
+  constructor(commentData) {
+    this.data = commentData;
+
+    this.render()
+  }
+
+  render() {
+    this.element = this.getElement();
+    this.subElements = this.getSubElements(this.element);
+
+    this.initListeners()
+
+    return this.element
+  }
+
+  initListeners() {
+    this.subElements.likeButton.addEventListener("click", this.likeOnClick);
+  }
+
+  getElement() {
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = this.getTemplate(this.data);
+
+    return wrapper.firstElementChild;
+  }
+
+  getTemplate(commentData) {
     return `
         <div class="comments-wrapper__comment comment">
-          <img src="" alt="">
-          <h1 class="comment__username">${commentData.username}</h1>
-          <p class="comment__text">${commentData.text}</p>
-          <p class="comment__date">${this.formatDate(commentData.date)}</p>
-          <span class="comment__likeCount">${commentData.likeCount}</span>
-          <button class="comment__likeButton">🖤</button>
-
-          <div id="ck-button">
-            <label>
-                <input type="checkbox" value="1"><span>red</span>
-            </label>
+          <div class="comment__title-wrapper">
+            <a class="comment__user-preview">${this.getUserPreview(commentData.username)}</a>
+            <a class="comment__username">${commentData.username}</a>
+            <p class="comment__date">${this.formatDate(commentData.date)}</p>
           </div>
+          <p class="comment__text">${commentData.text}</p>
+
+          <span class="comment__like-wrapper">
+            <button class="comment__like-button" data-element="likeButton">
+              <svg class="style_saved__kYktV" title="Like Like SVG File" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#828282" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                </path>
+              </svg>
+            </button>
+            <span class="comment__like-count" data-element="likeCount">${commentData.likeCount}</span>
+          </span>
 
         </div>
         `
+  }
+
+  getUserPreview(username) {
+    return username[0]
   }
 
   formatDate(date) {
@@ -169,10 +233,10 @@ export default class Comments {
 
     switch (true) {
       case date.getTime() >= startOfToday.getTime():
-        return `Сегодня ${hour}:${min}`;
+        return `Today ${hour}:${min}`;
 
       case date.getTime() >= startOfYesterday.getTime() && date.getTime() < startOfToday.getTime():
-        return `Вчера ${hour}:${min}`;
+        return `Yesterday ${hour}:${min}`;
 
       default:
         return `${day}.${month}.${year} ${hour}:${min}`
@@ -181,6 +245,18 @@ export default class Comments {
 
   formatDateSegment(dateSegment) {
     return (dateSegment < 10) ? '0' + dateSegment : dateSegment
+  }
+
+  getSubElements(element) {
+    const result = {};
+    const elements = element.querySelectorAll('[data-element]');
+
+    for (const subElement of elements) {
+      const name = subElement.dataset['element'];
+      result[name] = subElement;
+    }
+
+    return result;
   }
 
   remove() {
@@ -192,11 +268,5 @@ export default class Comments {
   destroy() {
     this.remove()
     this.element = null;
-  }
-}
-
-class Comment {
-  constructor(commentData) {
-    this.data = commentData;
   }
 }
