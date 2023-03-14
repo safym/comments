@@ -11,49 +11,59 @@
   <link rel="stylesheet" href="./src/styles/style.css">
   <link rel="stylesheet" href="./src/styles/normalize.css">
 
-  <style>
- 
-  </style>
-
 </head>
 
 <body>
 
-  <div id="root"></div>
+  <div id="root">
+      <!-- CommentsSection will be rendered here -->
+  </div>
 
   <script type="module">
     import CommentsSection from './index.js';
 
     const commentsData = [
-      {
+      { 
+        id: 5,
         username: 'Elizabeth Hines',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        date: new Date('2023-03-11T00:00:00'),
+        text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam gravida mattis neque, sit amet imperdiet justo dignissim at. Morbi eleifend, nisl sed hendrerit semper, leo felis pretium nisl, ut venenatis sem diam eu orci. Quisque fringilla dui odio, vel aliquam odio pellentesque a.`,
+        date: new Date(Date.now()),
         likeCount: 1,
       },
       {
+        id: 4,
         username: 'Malia Bradshaw',
         text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-        date: new Date('2023-03-11T23:59:59'),
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+        date: new Date(Date.now() - 0.5 * 86400000),
         likeCount: 5,
       },
       {
+        id: 3,
         username: 'Haleigh Poole',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        date: new Date('2023-03-12T00:00:00'),
+        text: `Integer vitae sapien auctor, consectetur ex non, laoreet tellus:
+- Proin ornare lorem ac purus condimentum gravida.
+- Quisque iaculis orci aliquet rutrum dictum.
+- Donec rutrum leo accumsan nisi dictum, condimentum ultrices eros placerat.
+- Donec pharetra nisl quis porta malesuada.`,
+        date: new Date(Date.now() - 86400000),
         likeCount: 2,
       },
       {
+        id: 2,
         username: 'Nasir Brewer',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        date: new Date('2023-03-12T00:30:59'),
+        text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+        date:  new Date(Date.now() - 2 * 86400000),
         likeCount: 10,
       },
       {
+        id: 1,
         username: 'Selina Gallagher',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        date: new Date('2023-03-10T01:00:59'),
+        text: ` Suspendisse faucibus lacus nulla, ac iaculis mi consectetur eget. Duis eu sapien ex. Etiam vitae mauris nec turpis dapibus imperdiet. Pellentesque eget viverra mauris. Morbi laoreet mollis interdum. Nulla in ante cursus, aliquam sem ut, tincidunt nisi. In hac habitasse platea dictumst. Vivamus tempor ultrices vulputate. Pellentesque quis mattis lorem, id dapibus nibh. Nulla vitae facilisis nisl.
+
+Fusce in congue justo. Nullam congue pharetra eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam a lectus nec lectus scelerisque semper a in quam. Donec tincidunt diam nec sem interdum pretium. Integer at volutpat eros, eu dictum ligula. Pellentesque fringilla ornare nisi at luctus. Vivamus quis urna mauris. In ut tortor scelerisque, dictum est ut, luctus est. Praesent lacinia sapien et erat euismod, in gravida dui molestie. Phasellus placerat quis mi id accumsan. Aenean consequat, massa eget laoreet imperdiet, justo metus elementum ante, non dignissim massa dolor eu eros. Vivamus eget turpis aliquam, bibendum eros eu, fringilla erat. Nam vel nisi ut metus lacinia suscipit a non purus. `,
+        date:  new Date(Date.now() - 3 * 86400000),
         likeCount: 2,
       },
     ]
