@@ -6,10 +6,11 @@ $height-ui: 50px;
 $transition: all ease-in-out 0.2s;
 
 $input-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
-$button-shadow: 0 1px 2px rgba(70, 131, 217, .48), inset 0 -1px 0 rgba(0, 0, 0, .12);
+$button-shadow: 0 1px 2px rgba(70, 131, 217, .48),
+inset 0 -1px 0 rgba(0, 0, 0, .12);
 
 $shadow-focus: 0 0 0 3px rgba(70, 131, 217, .12);
-$shadow-invalid: 0 0 0 2px rgba(217, 70, 190, 0.12);
+$input-shadow-focus: 0 0 0 2px rgba(70, 131, 217, .12);
 
 $primary-font-weight: 400;
 $secondary-font-weight: 600;
@@ -25,7 +26,8 @@ $offset: 10px;
 :root {
   --like-color: #e55c78;
   --like-bg-hover-color: #e55c771b;
-  --message-color: #cc5b7bb2;
+  --delete-bg-hover-color: #a8a8a81b;
+  --message-color: rgba(218, 119, 119, 0.697);
 
   --text-color-grey: #828282;
   --text-main-color: #000000;
@@ -69,19 +71,23 @@ body {
   background-color: var(--bg-body-color);
 }
 
+//----comments----------------------------------------------------------//
+
 .comments {
   display: flex;
   flex-direction: column;
 
-  &__header {
-    font-weight: $secondary-font-weight;
-    font-size: $font-size-l;
-    margin-bottom: 2 * $offset;
-  }
-
   &__comments-wrapper {
     padding: (3 * $offset) 0;
   }
+}
+
+//----header----------------------------------------------------------//
+
+.header {
+  font-weight: $secondary-font-weight;
+  font-size: $font-size-l;
+  margin-bottom: 2 * $offset;
 }
 
 //----form----------------------------------------------------------//
@@ -102,10 +108,6 @@ body {
     border-color: var(--border-color-focus) !important;
     box-shadow: $shadow-focus;
     background-color: var(--form-focus-bg-color);
-
-    & .form-field_state_invalid {
-      box-shadow: $shadow-invalid;
-    }
   }
 
   &:hover {
@@ -125,78 +127,94 @@ body {
 
   &__footer-wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
   }
 
-  &__message {
-    font-size: $font-size-s;
-    color: var(--message-color);
+  &__username-field {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__date-field {
+    width: 20%;
+    font-weight: 300;
+    color: var(--text-color-grey);
   }
 
   &__username {
-    width: 80%;
     height: $height-ui;
-    padding: $offset;
-
-    border-radius: $border-radius;
-    box-shadow: $input-shadow;
-    transition: $transition;
   }
 
   &__date {
-    width: 20%;
     height: $height-ui;
-    padding: $offset;
-    
-    font-weight: 300;
-    
-    border-radius: $border-radius;
-    box-shadow: $input-shadow;
-    color: var(--text-color-grey);
-    transition: $transition;
   }
 
   &__textarea {
-    padding: $offset;
-    margin: (1.5 * $offset) 0;
-
+    width: 100%;
     resize: none;
+  }
+}
+
+//----form-field----------------------------------------------------------//
+
+.form-field {
+  position: relative;
+
+  &__field {
+    width: 100%;
+    padding: $offset;
+
+    border-radius: $border-radius;
     box-shadow: $input-shadow;
-    border-radius: $border-radius;
-    transition: $transition;
-  }
-
-  &__borderline {
-    height: 2px;
-    margin: (1.5 * $offset) 0;
-    background: rgba(0, 0, 0, 0.034);
-  }
-
-  &__button-submit {
-    min-width: 170px;
-    height: $height-ui;
-    
-    font-weight: $secondary-font-weight;
-
-    color: var(--button-text-color);
-    border-radius: $border-radius;
-    box-shadow: $button-shadow;
-    background: var(--button-main-color);
     transition: $transition;
 
-    &:disabled {
-      background-color: var(--button-disabled-color);
-      cursor: auto;
+    &:focus {
+      box-shadow: $input-shadow-focus;
     }
+  }
 
-    &:not(:disabled):hover {
-      background: var(--button-hover-color);
-    }
+  &__message {
+    display:block;
+    height: 30px;
+    color: var(--message-color);
+  }
+}
 
-    &:not(:disabled):hover:active {
-      transform: translateY(3px);
-    }
+//----borderline----------------------------------------------------------//
+
+.borderline {
+  height: 2px;
+  margin: (1.5 * $offset) 0;
+  background: rgba(0, 0, 0, 0.034);
+}
+
+//----button----------------------------------------------------------//
+
+.button {
+  min-width: 170px;
+  height: $height-ui;
+
+  font-weight: $secondary-font-weight;
+
+  color: var(--button-text-color);
+  border-radius: $border-radius;
+  box-shadow: $button-shadow;
+  background: var(--button-main-color);
+  transition: $transition;
+
+  &:disabled {
+    background-color: var(--button-disabled-color);
+    cursor: auto;
+  }
+
+  &:not(:disabled):hover {
+    background: var(--button-hover-color);
+  }
+
+  &:not(:disabled):hover:active {
+    transform: translateY(3px);
   }
 }
 
@@ -207,18 +225,24 @@ body {
     margin-bottom: (3 * $offset);
   }
 
-
   &__title-wrapper {
     margin-bottom: $offset;
 
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
 
     & *:not(:last-child) {
       margin-right: 1.5 * $offset;
     }
+  }
+
+  &__title-column {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
   &__user-preview {
@@ -242,7 +266,8 @@ body {
   }
 
   &__text {
-    white-space: pre-wrap; 
+    white-space: pre-wrap;
+    word-break: break-all;
     margin-bottom: $offset;
   }
 
@@ -273,6 +298,7 @@ body {
 
     border-radius: 40%;
     transition: $transition;
+
     &:hover {
       stroke: var(--like-color);
       background-color: var(--like-bg-hover-color);
@@ -295,6 +321,26 @@ body {
       }
     }
   }
+
+  &__delete-icon {
+    width: 40px;
+    height: 40px;
+    padding: $offset;
+    border-radius: 40%;
+    transition: $transition;
+
+    & g{
+      fill: var(--text-color-grey);
+    }
+
+    &:hover {
+      background-color: var(--delete-bg-hover-color);
+    }
+
+    &:active {
+      transform: scale(0.8);
+    }
+  }
 }
 
 //----media----------------------------------------------------------//
@@ -304,12 +350,12 @@ body {
   .form {
     &__title-wrapper {
       flex-direction: column;
-  
+
       & *:not(:last-child) {
-        margin-bottom: 1.5 * $offset;
+        // margin-bottom: 1.5 * $offset;
       }
     }
-  
+
     &__footer-wrapper {
       flex-direction: column;
       align-items: center;
@@ -318,14 +364,13 @@ body {
         margin-bottom: 1.5 * $offset;
       }
     }
-  
-    &__username {
-      width: 100%;
-    }
-  
-    &__date {
+
+    &__username-field {
       width: 100%;
     }
 
+    &__date-field  {
+      width: 100%;
+    }
   }
 }
