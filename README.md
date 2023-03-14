@@ -1,5 +1,11 @@
 # Сomments block on HTML, CSS, JS
 
+Блок с комментариями и формой добавления комментария.
+
+[Github Pages](https://safym.github.io/comments/)
+
+[Reference](https://vc.ru/)
+
 ## Реализация:
 Форма добавления, обертка списка комментариев логически - экземпляр класса CommentSection.
 
