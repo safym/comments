@@ -22,7 +22,7 @@
   <div id="root"></div>
 
   <script type="module">
-    import Comments from './index.js';
+    import CommentsSection from './index.js';
 
     const commentsData = [
       {
@@ -58,7 +58,7 @@
       },
     ]
 
-    const commentsBlock = new Comments(commentsData);
+    const commentsBlock = new CommentsSection(commentsData);
 
     root.append(commentsBlock.element);
   </script>
