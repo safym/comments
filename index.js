@@ -339,9 +339,7 @@ export default class CommentsSection {
 
 class Comment {
 
-  likeOnClick = (event) => {
-    event.preventDefault()
-
+  likeOnClick = () => {
     (!this.likeIsActive) ?
     this.data.likeCount += 1: this.data.likeCount -= 1
 
@@ -349,8 +347,7 @@ class Comment {
     this.updateLikesCount()
   }
 
-  deleteOnClick = (event) => {
-    event.preventDefault()
+  deleteOnClick = () => {
     this.destroy()
     this.deleteComment(this.data.id)
   }
