@@ -1,17 +1,16 @@
-import escapeHtml from './src/utils/escape-html.js';
+import escapeHtml from './src/utils/escape-html.js'
 
 export default class CommentsSection {
-  element;
-  formElements;
-  subElements;
-  infoElements;
+  element
+  formElements
+  subElements
+  messageElements
 
-  fieldIsValid = {}
-  formIsValid;
+  formIsValid
 
   formData = {
     likeCount: 0
-  };
+  }
 
   onSubmit = (event) => {
     event.preventDefault()
@@ -24,10 +23,10 @@ export default class CommentsSection {
       const submitEvent = new SubmitEvent("submit", {
         cancelable: true,
         submitter: this.subElements.formButton
-      });
+      })
 
-      this.subElements.commentForm.dispatchEvent(submitEvent);
-      event.preventDefault();
+      this.subElements.commentForm.dispatchEvent(submitEvent)
+      event.preventDefault()
     }
   }
 
@@ -38,7 +37,7 @@ export default class CommentsSection {
     switch (elementName) {
       case 'date':
         this.formData[elementName] = this.getDate(target.value)
-        break;
+        break
       case 'username':
         this.formData[elementName] = target.value
         break
@@ -51,7 +50,7 @@ export default class CommentsSection {
   }
 
   autoResize = (event) => {
-    const offset = event.target.offsetHeight - event.target.clientHeight;
+    const offset = event.target.offsetHeight - event.target.clientHeight
     event.target.style.height = 'auto'
     event.target.style.height = event.target.scrollHeight + offset + 'px'
   }
@@ -94,7 +93,7 @@ export default class CommentsSection {
   }
 
   setDefaultValues() {
-    const today = new Date().toISOString().split('T')[0];
+    const today = new Date().toISOString().split('T')[0]
 
     this.formElements.date.value = today
     this.formElements.date.max = today
@@ -107,13 +106,13 @@ export default class CommentsSection {
   formReset() {
     this.formData = {
       likeCount: 0
-    };
+    }
 
     this.subElements.commentForm.reset()
-    this.formElements.text.style.height = 'auto';
+    this.formElements.text.style.height = 'auto'
     this.setDefaultValues()
 
-    this.formIsValid = false;
+    this.formIsValid = false
     this.toggleSubmitButton()
   }
 
@@ -131,67 +130,67 @@ export default class CommentsSection {
     let valid = false
 
     const min = 5,
-      max = 30;
+      max = 30
 
-    const username = elem.value.trim();
+    const username = elem.value.trim()
 
     if (this.isEmpty(username)) {
-      this.showMessage(elem, 'Username cannot be blank.');
+      this.showMessage(elem, 'Username cannot be blank.')
     } else if (!this.isBetween(username.length, min, max)) {
       this.showMessage(elem, `Username must be between ${min} and ${max} characters.`)
     } else {
-      this.showMessage(elem);
-      valid = true;
+      this.showMessage(elem)
+      valid = true
     }
 
-    return valid;
+    return valid
   }
 
   checkDate(elem) {
     let valid = false
 
-    const date = elem.value.trim();
+    const date = elem.value.trim()
 
     if (new Date(date) > new Date()) {
       this.showMessage(elem, `Incorrect date`)
     } else {
-      this.showMessage(elem);
-      valid = true;
+      this.showMessage(elem)
+      valid = true
     }
 
-    return valid;
+    return valid
   }
 
   checkText(elem) {
     let valid = false
 
     const min = 3,
-      max = 1500;
+      max = 1500
 
-    const text = elem.value.trim();
+    const text = elem.value.trim()
 
     if (this.isEmpty(text)) {
-      this.showMessage(elem, 'Comment cannot be blank.');
+      this.showMessage(elem, 'Comment cannot be blank.')
     } else if (!this.isBetween(text.length, min, max)) {
       this.showMessage(elem, `Comment must be between ${min} and ${max} characters.`)
     } else {
-      this.showMessage(elem);
-      valid = true;
+      this.showMessage(elem)
+      valid = true
     }
 
-    return valid;
+    return valid
   }
 
   showMessage(input, message = '') {
     const elementName = input.dataset.formelement
 
     const error = this.messageElements[elementName]
-    error.textContent = message;
-  };
+    error.textContent = message
+  }
 
   resetMessages() {
     for (const elementName in this.messageElements) {
-      this.messageElements[elementName].textContent = '';
+      this.messageElements[elementName].textContent = ''
     }
   }
 
@@ -248,8 +247,9 @@ export default class CommentsSection {
   }
 
   getNewId() {
-    const maxId = Math.max(...this.commentsData.map(x => x.id));
-    return maxId + 1;
+    const maxId = Math.max(...this.commentsData.map(x => x.id))
+
+    return maxId + 1
   }
 
   initListeners() {
@@ -263,19 +263,19 @@ export default class CommentsSection {
 
     this.formElements.text.addEventListener('input', this.autoResize)
 
-    this.subElements.commentForm.addEventListener("focus", this.formToggle, true);
+    this.subElements.commentForm.addEventListener("focus", this.formToggle, true)
     this.subElements.commentForm.addEventListener("blur", this.formToggle, true)
   }
 
   getElement() {
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = this.getTemplate();
+    const wrapper = document.createElement('div')
+    wrapper.innerHTML = this.getTemplate()
 
-    return wrapper.firstElementChild;
+    return wrapper.firstElementChild
   }
 
   getSubElements(element, datasetName) {
-    const result = {};
+    const result = {}
     const elements = element.querySelectorAll(`[data-${datasetName}]`)
 
     for (const subElement of elements) {
@@ -283,7 +283,7 @@ export default class CommentsSection {
       result[name] = subElement
     }
 
-    return result;
+    return result
   }
 
   getTemplate() {
@@ -340,31 +340,31 @@ export default class CommentsSection {
 class Comment {
 
   likeOnClick = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     (!this.likeIsActive) ?
     this.data.likeCount += 1: this.data.likeCount -= 1
 
-    this.likeIsActive = !this.likeIsActive;
+    this.likeIsActive = !this.likeIsActive
     this.updateLikesCount()
   }
 
   deleteOnClick = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     this.destroy()
     this.deleteComment(this.data.id)
   }
 
   constructor(commentData, deleteCallback) {
-    this.data = commentData;
+    this.data = commentData
     this.likeIsActive = false
-    this.deleteComment = deleteCallback;
+    this.deleteComment = deleteCallback
 
     this.render()
   }
 
   render() {
-    this.element = this.getElement();
+    this.element = this.getElement()
     this.subElements = this.getSubElements(this.element)
 
     this.initListeners()
@@ -422,7 +422,7 @@ class Comment {
       this.subElements.likeIcon.classList.add('comment__like-icon_state_disabled')
     }
 
-    this.subElements.likeCount.innerHTML = this.data.likeCount;
+    this.subElements.likeCount.innerHTML = this.data.likeCount
   }
 
   getUserPreview(username) {
@@ -434,14 +434,14 @@ class Comment {
       startOfToday = new Date()
 
     startOfYesterday.setDate(startOfYesterday.getDate() - 1)
-    startOfYesterday.setHours(0, 0, 0, 0);
+    startOfYesterday.setHours(0, 0, 0, 0)
 
     startOfToday.setDate(startOfToday.getDate())
-    startOfToday.setHours(0, 0, 0, 0);
+    startOfToday.setHours(0, 0, 0, 0)
 
-    let day = this.formatDateSegment(date.getDate());
+    let day = this.formatDateSegment(date.getDate())
     let month = this.formatDateSegment(date.getMonth() + 1)
-    let year = date.getFullYear();
+    let year = date.getFullYear()
     let hour = this.formatDateSegment(date.getHours())
     let min = this.formatDateSegment(date.getMinutes())
 
@@ -462,7 +462,7 @@ class Comment {
   }
 
   getSubElements(element) {
-    const result = {};
+    const result = {}
     const elements = element.querySelectorAll('[data-element]')
 
     for (const subElement of elements) {
@@ -470,7 +470,7 @@ class Comment {
       result[name] = subElement
     }
 
-    return result;
+    return result
   }
 
   remove() {

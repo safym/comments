@@ -176,8 +176,9 @@ body {
   }
 
   &__message {
-    display:block;
     height: 30px;
+    display:block;
+    font-size: 14px;
     color: var(--message-color);
   }
 }
@@ -350,10 +351,6 @@ body {
   .form {
     &__title-wrapper {
       flex-direction: column;
-
-      & *:not(:last-child) {
-        // margin-bottom: 1.5 * $offset;
-      }
     }
 
     &__footer-wrapper {
