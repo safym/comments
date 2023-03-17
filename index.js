@@ -436,11 +436,8 @@ class Comment {
     startOfToday.setDate(startOfToday.getDate())
     startOfToday.setHours(0, 0, 0, 0)
 
-    let day = this.formatDateSegment(date.getDate())
-    let month = this.formatDateSegment(date.getMonth() + 1)
-    let year = date.getFullYear()
-    let hour = this.formatDateSegment(date.getHours())
-    let min = this.formatDateSegment(date.getMinutes())
+    let hour = this.formatDateSegment(new Date().getHours())
+    let min = this.formatDateSegment(new Date().getMinutes())
 
     switch (true) {
       case date.getTime() >= startOfToday.getTime():
@@ -450,7 +447,11 @@ class Comment {
         return `Yesterday ${hour}:${min}`
 
       default:
-        return `${day}.${month}.${year} ${hour}:${min}`
+        const day = this.formatDateSegment(date.getDate())
+        const month = this.formatDateSegment(date.getMonth() + 1)
+        const year = date.getFullYear()
+
+        return `${day}.${month}.${year}`
     }
   }
 
