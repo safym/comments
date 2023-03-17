@@ -1,8 +1,17 @@
-<h1 align="center">💬 Сomments block (HTML, CSS, JS)</h1>
+<h1 align="center">💬 Сomments block</h1>
 
-A block with comments and a form for adding a comment.
+<p align="center">
+    <img height="100px" alt="HTML, CSS, JS" src="https://user-images.githubusercontent.com/99616798/225798818-8fdb9041-e98d-427a-bd68-c56ba7babdc6.png" />
+</p>
 
-[Style reference](https://vc.ru/)
+<p align="center">
+   <span>A block with comments and a form for adding a comment.</span>
+</p>
+
+<p align="center">
+   <a href="https://vc.ru/">Style reference</a>
+</p>
+
 
 ## 🔗 Github Pages
 
