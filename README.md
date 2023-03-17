@@ -54,7 +54,7 @@ Features of behavior:
 
 Блок с комментариями и формой добавления комментария.
 
-[Reference](https://vc.ru/)
+[Style reference](https://vc.ru/)
 
 ## 🔗 Github Pages
 
