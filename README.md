@@ -40,14 +40,7 @@ Features of behavior:
 * **Actions**:
 +**Like** affects the likes counter
 + **Deleting** removes an element from the DOM and from the data
-
-## 🔒 API limit
-
-> For unauthenticated requests, the rate limit allows for up to 60 requests per hour. Unauthenticated requests are associated with the originating IP address, and not the user making requests.
-
-For more information, see the [API documentation](https://docs.github.com/ru/rest/overview/resources-in-the-rest-api?apiVersion=2022-11-28).
-    
-    
+        
 <h1 align="center">💬 Блок комментариев (HTML, CSS, JS) [RU]</h1>
 
 Блок с комментариями и формой добавления комментария.
@@ -83,9 +76,3 @@ For more information, see the [API documentation](https://docs.github.com/ru/res
 * **Действия**:
     + **Лайк** влияет на счетчик лайков
     + **Удаление** удаляет элемент из DOM и из данных
-    
-## 🔒 Ограничение API
-
-> Для запросов, не прошедших проверку подлинности, ограничение скорости допускает до 60 запросов в час. Неаутентифицированные запросы связаны с исходным IP-адресом, а не с пользователем, отправляющим запросы.
-
-Подробнее, в [API документации](https://docs.github.com/ru/rest/overview/resources-in-the-rest-api?apiVersion=2022-11-28).
