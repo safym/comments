@@ -45,7 +45,7 @@ Features of behavior:
 * **Comment date** takes the value:
 + Today hh:mm : if the publication date is today
 + Yesterday hh:mm : if the publication date is yesterday
-+ dd.mm.yyyy hh:mm : if the publication date is earlier than yesterday's date
++ dd.mm.yyyy : if the publication date is earlier than yesterday's date
 * **Actions**:
 +**Like** affects the likes counter
 + **Deleting** removes an element from the DOM and from the data
@@ -71,7 +71,7 @@ Features of behavior:
 * **Дата комментария** принимает значение:
     + Today hh:mm : если дата публикации - сегодня
     + Yesterday hh:mm : если дата публикации - вчера
-    + dd.mm.yyyy hh:mm : если дата публикации - ранее, чем вчера
+    + dd.mm.yyyy : если дата публикации - ранее, чем вчера
 * **Действия**:
     + **Лайк** влияет на счетчик лайков
     + **Удаление** удаляет элемент из DOM и из данных
