@@ -1,19 +1,71 @@
-# Сomments block on HTML, CSS, JS
+<h1 align="center">💬 Сomments block (HTML, CSS, JS)</h1>
+
+A block with comments and a form for adding a comment.
+
+[Style reference](https://vc.ru/)
+
+## 🔗 Github Pages
+
+Live link: [Comments page](https://safym.github.io/comments/)
+
+## 🖥️ Screenshots
+
+<p align="center">
+    <img height="320px" src="https://user-images.githubusercontent.com/99616798/225784938-98369776-37c3-48d0-9338-786804166a0c.png" />
+    <img height="320px" src="https://user-images.githubusercontent.com/99616798/225786138-ba2c3cb8-0619-4327-8b42-33b115dcf8c1.png" />
+</p>
+
+## 📑 Implementation:
+The form of addition, the wrapper of the list of comments is logically an instance of the *CommentSection* class.
+
+Features of behavior:
+
+* **Validation of** fields and messages about incorrect data entered:
++ Username: non-empty from 5 to 30 characters
++ Date: non-empty and no more than today's date
++ Text: non-empty from 3 to 1500 characters
+* **Submit** of the form occurs by clicking the "Comment" button or by pressing Enter if the fields (username, date, text) are valid. The date may not be specified, then the date and time of the comment is the current one.
+* Added input data cleaning **(Input sanitization)** to filter input data from unwanted characters and strings to prevent the introduction of malicious codes into the system.
+* textarea field with the ability to **autoresize** - stretches in height, depending on the entered value
+* **Total number of comments** shows the current number, reflecting the deletion and addition of comments
+
+The comment element from the list of comments is logically an instance of the Comment class.
+
+Features of behavior:
+
+* **Comment date** takes the value:
++ Today hh:mm : if the publication date is today
++ Yesterday hh:mm : if the publication date is yesterday
++ dd.mm.yyyy hh:mm : if the publication date is earlier than yesterday's date
+* **Actions**:
++**Like** affects the likes counter
++ **Deleting** removes an element from the DOM and from the data
+
+## 🔒 API limit
+
+> For unauthenticated requests, the rate limit allows for up to 60 requests per hour. Unauthenticated requests are associated with the originating IP address, and not the user making requests.
+
+For more information, see the [API documentation](https://docs.github.com/ru/rest/overview/resources-in-the-rest-api?apiVersion=2022-11-28).
+    
+    
+<h1 align="center">💬 Блок комментариев (HTML, CSS, JS) [RU]</h1>
 
 Блок с комментариями и формой добавления комментария.
 
-[Github Pages](https://safym.github.io/comments/)
-
 [Reference](https://vc.ru/)
 
-## Реализация:
+## 🔗 Github Pages
+
+Публичная ссылка: [Comments page](https://safym.github.io/comments/)
+
+## 📑 Реализация:
 Форма добавления, обертка списка комментариев логически - экземпляр класса CommentSection.
 
 Особенности поведения:
 
 * **Валидация** полей и сообщения о некоррректных введенных данных:
     + Имя пользователя: непустое от 5 и до 30 символов
-    + Дата: непустое и не больше сегодняшней
+    + Дата: непустое и не больше сегодняшней даты
     + Текст: непустое от 3 до 1500 символов
 * **Submit** формы происходит по кнопке "Comment" или по нажатию Enter, если поля (имя пользователя, дата, текст) валидны. Дата может быть не указана, тогда дата и время комментария - текущее.
 * Добавлена очистка входных данных **(Input sanitization)** для фильтрации входных данных от нежелательных символов и строк для предотвращения внедрения вредоносных кодов в систему.
@@ -22,7 +74,7 @@
 
 Элемент комментария из списка логически - экзепляр класса Comment. 
 
-Имеет следующее особенности:
+Особенности поведения:
 
 * **Дата комментария** принимает значение:
     + Today hh:mm : если дата публикации - сегодня
@@ -31,3 +83,9 @@
 * **Действия**:
     + **Лайк** влияет на счетчик лайков
     + **Удаление** удаляет элемент из DOM и из данных
+    
+## 🔒 Ограничение API
+
+> Для запросов, не прошедших проверку подлинности, ограничение скорости допускает до 60 запросов в час. Неаутентифицированные запросы связаны с исходным IP-адресом, а не с пользователем, отправляющим запросы.
+
+Подробнее, в [API документации](https://docs.github.com/ru/rest/overview/resources-in-the-rest-api?apiVersion=2022-11-28).
