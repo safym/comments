@@ -24,7 +24,7 @@ Live link: [Comments page](https://safym.github.io/comments/)
     <img height="320px" src="https://user-images.githubusercontent.com/99616798/225786138-ba2c3cb8-0619-4327-8b42-33b115dcf8c1.png" />
 </p>
 
-## 📑 Implementation:
+## 📑 Implementation [EN]:
 The form of addition, the wrapper of the list of comments is logically an instance of the *CommentSection* class.
 
 Features of behavior:
@@ -50,17 +50,7 @@ Features of behavior:
 +**Like** affects the likes counter
 + **Deleting** removes an element from the DOM and from the data
         
-<h1 align="center">💬 Блок комментариев (HTML, CSS, JS) [RU]</h1>
-
-Блок с комментариями и формой добавления комментария.
-
-[Style reference](https://vc.ru/)
-
-## 🔗 Github Pages
-
-Публичная ссылка: [Comments page](https://safym.github.io/comments/)
-
-## 📑 Реализация:
+## 📑 Реализация [RU]:
 Форма добавления, обертка списка комментариев логически - экземпляр класса CommentSection.
 
 Особенности поведения:
