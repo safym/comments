@@ -3,11 +3,11 @@
 //----variables----------------------------------------------------------//
 
 $height-ui: 50px;
+$size-icon: 40px;
 $transition: all ease-in-out 0.2s;
 
 $input-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
-$button-shadow: 0 1px 2px rgba(70, 131, 217, .48),
-inset 0 -1px 0 rgba(0, 0, 0, .12);
+$button-shadow: 0 1px 2px rgba(70, 131, 217, .48), inset 0 -1px 0 rgba(0, 0, 0, .12);
 
 $shadow-focus: 0 0 0 3px rgba(70, 131, 217, .12);
 $input-shadow-focus: 0 0 0 2px rgba(70, 131, 217, .12);
@@ -16,6 +16,7 @@ $primary-font-weight: 400;
 $secondary-font-weight: 600;
 
 $border-radius: 8px;
+$actions-border-radius: 40%;
 
 $font-size-s: 16px;
 $font-size-m: 18px;
@@ -242,13 +243,14 @@ body {
   &__title-column {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
   }
 
   &__user-preview {
-    width: 40px;
-    height: 40px;
+    min-width: $size-icon;
+    height: $size-icon;
     border-radius: 50%;
 
     display: flex;
@@ -293,11 +295,11 @@ body {
   }
 
   &__like-icon {
-    width: 40px;
-    height: 40px;
+    width: $size-icon;
+    height: $size-icon;
     padding: $offset;
 
-    border-radius: 40%;
+    border-radius: $actions-border-radius;
     transition: $transition;
 
     &:hover {
@@ -324,10 +326,10 @@ body {
   }
 
   &__delete-icon {
-    width: 40px;
-    height: 40px;
+    min-width: $size-icon;
+    height: $size-icon;
     padding: $offset;
-    border-radius: 40%;
+    border-radius: $actions-border-radius;
     transition: $transition;
 
     & g{
@@ -348,9 +350,9 @@ body {
 
 @media only screen and (max-width: 950px) {
   .form {
-    &__title-wrapper {
-      flex-direction: column;
-    }
+      &__title-wrapper {
+        flex-direction: column;
+      }
 
     &__footer-wrapper {
       flex-direction: column;
